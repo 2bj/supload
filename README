@@ -1,0 +1,54 @@
+.. -*- mode: rst -*-
+
+What is ``supload``?
+-----------------
+
+It's simple script for upload file to cloud storage based on
+`OpenStack Swift API <http://docs.openstack.org/trunk/openstack-object-storage/developer/content/>`_.
+
+
+Feature
+-------
+
+* recursive upload
+* check files by MD5 hash
+* upload only modified files
+
+
+Installation
+------------
+
+For use script need installed utilities ``curl`` and ``file``.
+Install for debian/ubuntu::
+
+    $ apt-get install curl file
+
+Get script::
+
+    $ wget https://raw.github.com/selectel/supload/master/supload.sh
+    $ chmod +x supload.sh
+
+You may move script to /usr/bin or /usr/local/bin if want.
+
+
+Usage
+-----
+
+By default the script work with Selectel Cloud Storage.
+
+Get help::
+
+    $ ./supload
+
+Upload one file, file will be uploaded if not existence in storage or
+local file is difference from file in storage (md5 check)::
+
+    $ ./supload -u USERNAME -k USERKEY storage_dir local_file.path
+
+Upload all files in directory recursive (option ``-r``)::
+
+    $ ./supload -u USRNAME -k USERKEY -r storage_dir local_dir/
+
+Force upload without checking existence files in storage by md5 (option ``-M``)::
+
+    $ ./supload -u USERNAME -k USERKEY -r -M storage_dir local_dir/
